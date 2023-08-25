@@ -89,7 +89,7 @@ def describeInstance(instanceId):
                 print ((x['Key'] in knownTagList))
                 tagdict[x['Key']] = x['Value']
             else:
-                print(f"checking for {knownTagList} tags only and ignoring the rest {x['Key']}")
+                print(f"checking for {knownTagList} tags only and ignoring the rest of the tag keys")
         print(tagdict)
     except ClientError as err:
         print (f'{err} - Please check if instance - {instanceId} exists')
@@ -110,17 +110,17 @@ def lambda_handler(event, context):
     print (f'Lenght of the known tags is {len(tagdict)}')
     print (f'tagdict in handler is {tagdict}')
     if len(tagdict) > 0:
-        if 'ServiceOwner' in tagdict:
-            print(f"ServiceOwner exists {tagdict}")
-            SESNotification(tagdict['ServiceOwner'],INSTANCE_ID) 
+        if tagName1 in tagdict:
+            print(f"{tagName1} exists {tagdict}")
+            SESNotification(tagdict[tagName1],INSTANCE_ID) 
             return 
-        elif 'SystemsOwner' in tagdict:
-            print(f"SystemsOwner exists {tagdict}")
-            SESNotification(tagdict['SystemOwner'],INSTANCE_ID) 
+        elif tagName2 in tagdict:
+            print(f"{tagName2} exists {tagdict}")
+            SESNotification(tagdict[tagName2],INSTANCE_ID) 
             return 
-        elif 'Service' in tagdict:
-            print(f"Service exists {tagdict}")
-            SESNotification(tagdict['Service'],INSTANCE_ID) 
+        elif tagName3 in tagdict:
+            print(f"{tagName3} exists {tagdict}")
+            SESNotification(tagdict[tagName3],INSTANCE_ID) 
             return 
         else:
             #Mising needed tags from affected instance, sending an email to the account Admin set as the Environment Variable "From_EMAIL". 
