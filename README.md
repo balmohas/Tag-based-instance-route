@@ -7,7 +7,6 @@
 **Background**
 
 AWS provides customers regular updates on service notifications and planned activities such as operational, security, and billing activity via e-mail to the root account owners and alternate contacts. AWS also provides granular notifications to customers via AWS Health Dashboard, allowing them to fine-tune their alerts on issues relating directly to them. However, as customers grow and add new accounts within AWS Organizations, each of these accounts may generate alerts based on the AWS Health events, and it becomes important to redirect those alerts to the appropriate teams at scale.
-
 Here is the guidance on alerting on AWS infrastructure health events using AWS Health, and fine-tune notifications to fit in to your existing workflows with the right tagging strategy (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html) so you can identify resources and direct your alerts to the appropriate areas of responsibility. 
 
 **Architecture**
@@ -17,7 +16,7 @@ Here is the guidance on alerting on AWS infrastructure health events using AWS H
 
 **Solution Overview** 
 
-This solution checks the affected instances with "AWS_EC2_MAINTENANCE_SCHEDULED" under the health system service. When the Health System sends a notification to the Health API service, it triggers an Event bridge call, which triggers the lambda function. This code checks to see if the unstance has a tag(s) in order, such as ServiceOwner, SystemOwner, and Service. You can customize them via Environment Variables
+This solution checks the affected instances with "AWS_EC2_MAINTENANCE_SCHEDULED" under the health system service. When the Health System sends a notification to the Health API service, it triggers an EventBridge event, which triggers the lambda function. This code checks to see if the unstance has a tag(s) in order, such as ServiceOwner, SystemOwner, and Service. You can customize them via Environment Variables
 - TAG_NAME1 = ServiceOwner
 - TAG_NAME2 = SystemsOwner
 - TAG_NAME3 = Service
@@ -43,6 +42,16 @@ Set the following Environment Variables
 3. Create a lambda function from scratch and copy the code from "tag_based_instance_routing.py". **NOTE** Please add appropriate region and the AWS account number for the policy.
 4. Ensure you have add Environment Variables as mentioned in the Prerequisite.
 5. Create an Lambda Execution Role using the policy *lambda_execution_role.json* and add it to the function.
+6. Create an Event bridge using custom rule and set the target as the lambda function from the step#3 -
+   {
+  "source": ["aws.health"],
+  "detail-type": ["AWS Health Event"],
+  "detail": {
+    "service": ["EC2"],
+    "eventTypeCategory": ["scheduledChange"]
+  }
+}
+
 
 **How Lambda function works**
 
