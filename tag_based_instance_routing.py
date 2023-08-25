@@ -22,7 +22,8 @@ import os
                     ###Business Logic####
 #If ServieOwner tag exists then it sends an email associate with tag value (assuming it is a verified email). If ServiceOwner does not exists, it checks for SystemsOwner tag
 #and sends an email to email address assocaited with its value (assuming it is a verified email). If both of them are not available, then it checks for Service tag, 
-#and sends an email to email address assocaited with its value (assuming it is a verified email). If none of the standard tags are available, then it sends email to the 
+#and sends an email to email address assocaited with its value (assuming it is a verified email). If none of the standard tags are available, then it sends email to the email
+#associated with the ADMIN_EMAIL Environment Variable.
 #
 
 
