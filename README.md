@@ -12,7 +12,7 @@ Here is the guidance on alerting on AWS infrastructure health events using AWS H
 
 **Architecture**
 
-![Alt text](/Users/balmohas/Documents/Ballu/Code/health)
+
 
 **Solution Overview** 
 This solution checks the affected instances with "AWS_EC2_MAINTENANCE_SCHEDULED" under the health system service. When the Health System sends a notification to the Health API service, it triggers an Event bridge call, which triggers the lambda function. This code checks to see if the unstance has a tag(s) in order, such as ServiceOwner, SystemOwner, and Service. You can customize them via Environment Variables
