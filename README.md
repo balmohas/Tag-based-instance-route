@@ -1,9 +1,11 @@
 
 
 **Title**
+
 <u> Using Tag-Based filtering to manage instance Health Monitoring and Alerting at Scale <u>
 
 **Background**
+
 AWS provides customers regular updates on service notifications and planned activities such as operational, security, and billing activity via e-mail to the root account owners and alternate contacts. AWS also provides granular notifications to customers via AWS Health Dashboard, allowing them to fine-tune their alerts on issues relating directly to them. However, as customers grow and add new accounts within AWS Organizations, each of these accounts may generate alerts based on the AWS Health events, and it becomes important to redirect those alerts to the appropriate teams at scale.
 
 Here is the guidance on alerting on AWS infrastructure health events using AWS Health, and fine-tune notifications to fit in to your existing workflows with the right tagging strategy (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html) so you can identify resources and direct your alerts to the appropriate areas of responsibility. 
