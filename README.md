@@ -18,20 +18,25 @@ Here is the guidance on alerting on AWS infrastructure health events using AWS H
 
 
 **Solution Overview** 
+
 This solution checks the affected instances with "AWS_EC2_MAINTENANCE_SCHEDULED" under the health system service. When the Health System sends a notification to the Health API service, it triggers an Event bridge call, which triggers the lambda function. This code checks to see if the unstance has a tag(s) in order, such as ServiceOwner, SystemOwner, and Service. You can customize them via Environment Variables
-- TAG_NAME1 ServiceOwner
-- TAG_NAME2 SystemsOwner
-- TAG_NAME3 Service
+- TAG_NAME1 = ServiceOwner
+- TAG_NAME2 = SystemsOwner
+- TAG_NAME3 = Service
 
 **Prerequisite** 
+
 Set the following Environment Variables
 
-- ADMIN_EMAIL user@domain.com --> Let's assume that none of the standard tags set correctly on the instances, then the script sends an email set for ADMIN_MAIL (Assuming it is a verified email)
-- FROM_EMAIL	donot_response@domain.com  usually customers have email like donot_response@domain.com
-- REGION	us-west-2 --> assuming you want to monitor alert the instance for the us-west-2 region. Please choose an appropriate region.
-- TAG_NAME1 ServiceOwner
-- TAG_NAME2 SystemsOwner
-- TAG_NAME3 Service 
+- ADMIN_EMAIL = user@domain.com --> Let's assume that none of the standard tags set correctly on the instances, then the script sends an email set for ADMIN_MAIL (Assuming it is a verified email)
+ 
+- FROM_EMAIL	= donot_response@domain.com  usually customers have email like donot_response@domain.com
+
+- REGION	= us-west-2 --> assuming you want to monitor alert the instance for the us-west-2 region. Please choose an appropriate region.
+
+- TAG_NAME1 = ServiceOwner
+- TAG_NAME2 = SystemsOwner
+- TAG_NAME3 = Service 
 
 Steps:
 1. 
