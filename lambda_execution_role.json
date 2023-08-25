@@ -6,7 +6,7 @@
             "Action": [
                 "logs:CreateLogGroup"
             ],
-            "Resource": "arn:aws:logs:us-west-2:365610231659:*"
+            "Resource": "arn:aws:logs:us-west-2:xxxxxxxxxxxx:*"
         },
         {
             "Sid": "Statement1",
@@ -28,7 +28,7 @@
                 "logs:PutLogEvents"
             ],
             "Resource": [
-                "arn:aws:logs:us-west-2:365610231659:log-group:/aws/lambda/events:*"
+                "arn:aws:logs:us-west-2:xxxxxxxxxxxx:log-group:/aws/lambda/events:*"
             ]
         }
     ]
