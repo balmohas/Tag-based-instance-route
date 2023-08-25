@@ -129,7 +129,7 @@ def lambda_handler(event, context):
             SESNotification( emailToAdmin,INSTANCE_ID) 
             return
     else:
-            #Mising needed tags from affected instance, sending an email to the account Admin. I have set an enviornment variable "ADMIN_EMAIL as "yasin.mohammed@zoom.us". 
+            #Mising needed tags from affected instance, sending an email to the account Admin set as the Environment Variable "From_EMAIL". 
             #You can change it alias with a couple of admins
             SESNotification( emailToAdmin,INSTANCE_ID)
             return 
