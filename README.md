@@ -40,7 +40,7 @@ Set the following Environment Variables
 
 1. Clone this repository.
 2. Log into AWS Management Console and navigate to the lambda console. Ensure you are in the *us-west-2* region. If you need to run this lambda function from another account then make sure to change *REGION* Environment Variable accordingly.	
-3. Create a lambda function from scratch and copy the code from "tag_based_instance_routing.py"
+3. Create a lambda function from scratch and copy the code from "tag_based_instance_routing.py". **NOTE** Please add appropriate region and the AWS account number for the policy.
 4. Ensure you have add Environment Variables as mentioned in the Prerequisite.
 5. Create an Lambda Execution Role using the policy *lambda_execution_role.json* and add it to the function.
 
