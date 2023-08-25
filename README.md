@@ -12,7 +12,8 @@ Here is the guidance on alerting on AWS infrastructure health events using AWS H
 
 **Architecture**
 
-![alt text]( https://github.com/balmohas/Tag-based-instance-route/blob/main/image.png)
+![alt text](https://github.com/balmohas/Tag-based-instance-route/assets/93612585/30fbaa23-bf09-4401-85da-b8cc89577ac3)
+
 
 
 **Solution Overview** 
