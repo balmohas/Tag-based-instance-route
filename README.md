@@ -15,8 +15,6 @@ Here is the guidance on alerting on AWS infrastructure health events using AWS H
 ![alt text]( https://github.com/balmohas/Tag-based-instance-route/blob/main/image.png?raw=true)![image](https://github.com/balmohas/Tag-based-instance-route/assets/93612585/301ad588-5df8-41ec-a395-830dc5226f71)
 
 
-
-
 **Solution Overview** 
 
 This solution checks the affected instances with "AWS_EC2_MAINTENANCE_SCHEDULED" under the health system service. When the Health System sends a notification to the Health API service, it triggers an Event bridge call, which triggers the lambda function. This code checks to see if the unstance has a tag(s) in order, such as ServiceOwner, SystemOwner, and Service. You can customize them via Environment Variables
@@ -38,25 +36,16 @@ Set the following Environment Variables
 - TAG_NAME2 = SystemsOwner
 - TAG_NAME3 = Service 
 
-Steps:
-1. 
-Download the tag_based_instance_routing.py and copy 
-lambda_function.py.
-lambda_execution_role.json (Execution role for lambda)
-You have set some environment variables
-ADMIN_EMAIL   yasin@zoom.com # this is usually @info@example.com or info@amazon.com
-FROMEMAIL       yasin@zoom.com #this is the email of the admin - for ex: yasin@zoom.com
-REGION us-west-2 # lambda function region.
-This is how the lambda function works
-#Here is the logic for the flow -
-#For this function to work, you need to make sure that the EC2 instance has at the minimum one of these tags for
-ServiceOwner --> Email Address
-SystemOwner --> Email Address
-Service --> Email Address (Since I don’t have the logic from you, I assume to be an email and coded. I hope you can have your engineers to add logic for mapping between service principals and email and update the attached code.
- 
-Script checks in the order
-if ServiceOwner tag exists, if it does and have an email address, it sends an email to the ServiceOwner and then exit.
-If it does not, it checks out for SystemOwner tag exists, if it does and have an email address, it sends an email to the SystemOwner and then exit.
-If it does not, it checks out for Service tag exists, if it does and have an email address, it sends an email to the Service and then exit.
-If none of the above tags available, it sends an email to a user set as the Environment variable --> FROMEMAIL.
+**Steps:**
+
+1. Clone this repository.
+2. Log into AWS Management Console and navigate to the lambda console. Ensure you are in the *us-west-2* region. If you need to run this lambda function from another account then make sure to change *REGION* Environment Variable accordingly.	
+3. Create a lambda function from scratch and copy the code from "tag_based_instance_routing.py"
+4. Ensure you have add Environment Variables as mentioned in the Prerequisite.
+5. Create an Lambda Execution Role using the policy *lambda_execution_role.json* and add it to the function.
+
+**How Lambda function works**
+
+
+If tag TAG_NAME1 exists on the instance then it sends an email associate with its value (assuming it is a verified email). If TAG_NAME1 does not exists, it checks for TAG_NAME2 tag and sends an email to email address assocaited with its value (assuming it is a verified email). If both of them are not available, then it checks for TAG_NAME3 and sends an email to email address assocaited with its value (assuming it is a verified email). If none of the standard tags are available, then it sends email to the email associated with the ADMIN_EMAIL Environment Variable.
  
